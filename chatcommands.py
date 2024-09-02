@@ -700,11 +700,10 @@ def approve(msg, pr_id):
         raise CmdException(str(e))
 
 
-@command(str, privileged=True, whole_msg=True, give_name=True, aliases=["close",
-                                                                        "reject-force",
-                                                                        "close-force",
-                                                                        "reject-duplicate",
-                                                                        "close-duplicate"])
+@command(
+    str, privileged=True, whole_msg=True, give_name=True,
+    aliases=["close", "reject-force", "close-force",
+             "reject-duplicate", "close-duplicate"])
 def reject(msg, args, alias_used="reject"):
     argsraw = args.split(' "', 1)
     try:
@@ -739,7 +738,7 @@ def reject(msg, args, alias_used="reject"):
     reject_reason_image_text = "\n\n![Rejected with SmokeyReject]({})".format(rejected_image)
     comment = rejected_by_text + reject_reason_text + reject_reason_image_text
     try:
-        message = GitManager.reject_pull_request(pr_id, comment, duplicate)
+        message = GitManager.reject_pull_request(pr_id, comment, is_duplicate=duplicate)
         return message
     except Exception as e:
         raise CmdException(str(e))
