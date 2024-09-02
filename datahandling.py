@@ -240,9 +240,6 @@ def update_code_privileged_users_list():
 def is_code_privileged(site, user_id):
     if GlobalVars.code_privileged_users is None:
         update_code_privileged_users_list()
-    print("## GlobalVars.code_privileged_users:", GlobalVars.code_privileged_users)
-    GlobalVars.code_privileged_users.add((site, user_id))
-    print("### GlobalVars.code_privileged_users:", GlobalVars.code_privileged_users)
 
     try:
         # For now, disable the moderator override on code/blacklist changes
